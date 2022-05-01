@@ -8,4 +8,4 @@ RUN apt-get install -y unbound
 COPY src .
 RUN cp unbound.conf /etc/unbound/unbound.conf
 
-ENTRYPOINT ["/usr/sbin/unbound"]
+ENTRYPOINT ["/usr/sbin/unbound", "-d"]
