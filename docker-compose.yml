@@ -1,0 +1,26 @@
+# docker-compose.yml
+services:
+  pihole:
+    container_name: dns-pihole
+    image: pihole/pihole
+    restart: unless-stopped
+    network_mode: container:vpn
+    environment:
+      TZ: America/New_York
+      DNSMASQ_LISTENING: all
+      DNSSEC: true
+      WEBTHEME: default-darker
+      PIHOLE_DNS_: 127.0.0.1#5335
+    volumes:
+      - type: bind
+        source: /data/dns/pihole
+        target: /etc/pihole
+      - type: bind
+        source: /data/dns/dnsmasq.d
+        target: /etc/dnsmasq.d
+  unbound:
+    container_name: dns-unbound
+    build:
+      context: unbound
+    restart: unless-stopped
+    network_mode: container:vpn
