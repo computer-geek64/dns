@@ -24,3 +24,5 @@ services:
       context: unbound
     restart: unless-stopped
     network_mode: container:vpn
+    cap_add:
+      - NET_ADMIN
